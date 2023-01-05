@@ -1,8 +1,10 @@
 import React from "react";
 import axios from 'axios';
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 //import "./styles.css";
 export default function Login() {
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -19,8 +21,14 @@ export default function Login() {
         console.log(data.username)
         axios.post('http://localhost:3001/login/auth', {username: data.username, password: data.password})
             .then((response) => {
-                localStorage.setItem("authentication", "Bearer " + response.data)
-
+                localStorage.setItem("authentication", "Bearer " + response.data.token)
+                localStorage.setItem("role", response.data.role)
+                if(response.data.role === 'admin') {
+                    return navigate('/admin')
+                }
+                else {
+                    return navigate('/user')
+                }
             })
             .then((result) => {
                 console.log(result)//chiedere il path successivo
