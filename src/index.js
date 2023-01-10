@@ -4,28 +4,23 @@ import './index.css';
 import Login from "./routes/login.jsx";
 import Admin from "./routes/admin.jsx";
 import User from "./routes/user.jsx";
-import ShowDatabase from "./routes/showDatabase.jsx";
-import Sign from "./routes/sign.jsx";
+import ShowUsers from "./routes/showUsers.jsx";
+import Signup from "./routes/signup.jsx";
 import ModifyUser from "./routes/modifyUser.jsx";
 import DeleteUser from "./routes/deleteUser.jsx";
 import CheckUser from "./routes/checkUser.jsx";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
-    createBrowserRouter, Navigate,
+    createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
 
-const checkLoggedIn = () => {
-    if(!localStorage.getItem('authentication')) return <Login />
-    else if(localStorage.getItem('role') === 'admin') return <Navigate to = '/admin'/>
-    else return <Navigate to = '/user'/>
-}
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: checkLoggedIn(),
+        element: <Login />,
     },
     {
         path: "/admin",
@@ -37,11 +32,11 @@ const router = createBrowserRouter([
     },
     {
         path: "/showDatabase",
-        element: <ShowDatabase />
+        element: <ShowUsers />
     },
     {
         path: "/sign",
-        element: <Sign />
+        element: <Signup />
     },
     {
         path: "/modifyUser",

@@ -1,7 +1,22 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
 
-//aggiungere controllo ruolo
 export default function Admin() {
+    const navigate = useNavigate()
+    const token = localStorage.getItem('authentication')
+    axios.get('http://localhost:3001/validate', {headers: {'authorization': token}})
+        .then((response) => {
+            if (!response.data) {
+                return navigate('/')
+            }
+        })
+        .catch(e => {console.error(e)})
+    const role = localStorage.getItem('role');
+    if (role !== 'admin') {
+        console.log('stop you cannot access');
+        return navigate('/')
+    }
+
     return(
         <div>
             <Link to = "/showDatabase">

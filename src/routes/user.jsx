@@ -9,28 +9,40 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useEffect} from 'react';
 import {useState} from 'react';
+import {useNavigate} from "react-router-dom";
 
 export default function User() {
+    const navigate = useNavigate()
     const role = localStorage.getItem('role')
     const token = localStorage.getItem('authentication')
     const [rows, setRows] = useState([])
+
     useEffect(() => {
-        if(role !== "user") {
-            //finire implementazione ruoli differenti
-            return null
-        }
-        axios.get('http://localhost:3001/loggedSessions/', {headers:{'authorization': token}})
+        axios.get('http://localhost:3001/validate', {headers: {'authorization': token}})
             .then((response) => {
-                setRows(response.data)
+                if (!response.data) {
+                    return navigate('/')
+                }
+                if (role !== "user") {
+                    return navigate('/admin')
+                }
+                axios.get('http://localhost:3001/loggedSessions/', {headers: {'authorization': token}})
+                    .then((response) => {
+                        setRows(response.data)
+                    })
+                    .catch(e => {
+                        console.error(e)
+                    })
             })
-            .catch(e =>{
+            .catch(e => {
                 console.error(e)
             })
+
     })
     return (
         <div className="App">
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Users</TableCell>
@@ -41,7 +53,7 @@ export default function User() {
                         {rows.map((row) => (
                             <TableRow
                                 key={row.user_username}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
                                     {row.user_username}

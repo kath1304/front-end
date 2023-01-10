@@ -3,8 +3,9 @@ import {useNavigate} from "react-router-dom";
 import React from "react";
 import axios from 'axios';
 
-export default function Sign() {
-
+export default function Signup() {
+    const token = localStorage.getItem('authentication')
+    const role = localStorage.getItem('role');
     const navigate = useNavigate()
     const {
         register,
@@ -21,12 +22,11 @@ export default function Sign() {
     });
 
     const onSubmit = (data) => {
-        const token = localStorage.getItem('authentication')
-        const role = localStorage.getItem('role');
         console.log(data.firstname)
         console.log(role)
         if (role === 'user') {
             console.log('stop you cannot access');
+            return navigate('/user')
         }
         axios.post('http://localhost:3001/users/', {
             username: data.username,
@@ -35,15 +35,22 @@ export default function Sign() {
             email: data.email,
             password: data.password,
         }, {headers: {'authorization': token, 'role': role}})
-            .then((response) => {
+            .then(() => {
                 return navigate('/checkUser')
+                //add sending user
             })
             .catch((error) => {
                 console.error(error)
             })
     }
 
-
+    axios.get('http://localhost:3001/validate', {headers: {'authorization': token}})
+        .then((response) => {
+            if (!response.data) {
+                return navigate('/')
+            }
+        })
+        .catch(e => {console.error(e)})
     return(
         <div className="App">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -90,7 +97,7 @@ export default function Sign() {
                 <LockOutlinedIcon/>
             </Avatar>
             <Typography component="h1" variant="h5">
-                Sign up
+                Signup up
             </Typography>
             <form className={classes.form} noValidate>
                 <Grid container spacing={2}>
@@ -154,12 +161,12 @@ export default function Sign() {
                     color="primary"
                     className={classes.submit}
                 >
-                    Sign Up
+                    Signup Up
                 </Button>
                 <Grid container justifyContent="flex-end">
                     <Grid item>
                         <Link href="#" variant="body2">
-                            Already have an account? Sign in
+                            Already have an account? Signup in
                         </Link>
                     </Grid>
                 </Grid>

@@ -2,8 +2,8 @@ import React from "react";
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-//import "./styles.css";
 export default function Login() {
+    const oldToken = localStorage.getItem('authentication')
     const navigate = useNavigate()
     const {
         register,
@@ -15,6 +15,18 @@ export default function Login() {
             password: ''
         }
     });
+
+    axios.get('http://localhost:3001/validate', {headers: {'authorization': oldToken}})
+        .then((response) => {
+            if(response.data) {
+                if (localStorage.getItem('role') === 'admin') {
+                    return navigate('/admin')
+                } else if (localStorage.getItem('role') === 'user') {
+                    return navigate('/user')
+                }
+            }
+        })
+        .catch(e => {console.error(e)})
 
 
     const onSubmit = (data) => {
@@ -29,9 +41,6 @@ export default function Login() {
                 else {
                     return navigate('/user')
                 }
-            })
-            .then((result) => {
-                console.log(result)//chiedere il path successivo
             })
             .catch((e) => {
                 console.error(e)
