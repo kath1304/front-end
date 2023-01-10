@@ -12,13 +12,20 @@ import CheckUser from "./routes/checkUser.jsx";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
-    createBrowserRouter,
+    createBrowserRouter, Navigate,
     RouterProvider,
 } from "react-router-dom";
+
+const checkLoggedIn = () => {
+    if(!localStorage.getItem('authentication')) return <Login />
+    else if(localStorage.getItem('role') === 'admin') return <Navigate to = '/admin'/>
+    else return <Navigate to = '/user'/>
+}
+
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Login />,
+        element: checkLoggedIn(),
     },
     {
         path: "/admin",
