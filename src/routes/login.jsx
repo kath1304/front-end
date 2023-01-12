@@ -36,6 +36,12 @@ export default function Login() {
                     return navigate('/paths/user')
                 }
             }
+            let user = localStorage.getItem("username")
+            if(user) {
+                axios.post('http://localhost:3001/logout/delete', {username: user})
+                    .then(() => {console.log('sessione eliminata')})
+                    .catch(e => {console.error(e)})
+            }
         })
         .catch(e => {console.error(e)})
 
@@ -46,6 +52,7 @@ export default function Login() {
             .then((response) => {
                 localStorage.setItem("authentication", "Bearer " + response.data.token)
                 localStorage.setItem("role", response.data.role)
+                localStorage.setItem("username", response.data.username)
                 intervalId = setInterval(autoRenew, 3480000)
                 if(response.data.role === 'admin') {
                     return navigate('/paths/admin')

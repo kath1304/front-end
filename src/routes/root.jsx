@@ -24,6 +24,7 @@ function handleClickLogout() {
         .then(() => {
             localStorage.removeItem('authentication')
             localStorage.removeItem('role')
+            localStorage.removeItem('username')
             return navigate('/')
         })
         .catch(e => {console.error(e)})
