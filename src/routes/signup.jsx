@@ -8,12 +8,13 @@ import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {Input, Stack} from "@mui/material";
+import {Input, MenuItem, Select, Stack} from "@mui/material";
 
 
 export default function Signup() {
     const token = localStorage.getItem('authentication')
     const role = localStorage.getItem('role');
+    let newRole
     const navigate = useNavigate()
     const {
         register,
@@ -29,6 +30,7 @@ export default function Signup() {
             role: '',
         }
     });
+
 
     const onSubmit = (data) => {
         axios.post('http://localhost:3001/users/', {
@@ -128,13 +130,17 @@ export default function Signup() {
                     </div>
 
                     <div>
-                        <TextField
-                            id="outlined-role-input"
+
+                        <Select
+                            labelId="role-input"
+                            id="demo-simple-select"
+                            value={newRole}
                             label="Role"
-                            name="role"
-                            autoComplete="current-role"
                             {...register("role_name", {required: true})}
-                        />
+                        >
+                            <MenuItem value={'admin'}>Admin</MenuItem>
+                            <MenuItem value={'user'}>User</MenuItem>
+                        </Select>
                     </div>
 
 
@@ -152,3 +158,10 @@ export default function Signup() {
 
 
 }
+/*<TextField
+                            id="outlined-role-input"
+                            label="Role"
+                            name="role"
+                            autoComplete="current-role"
+                            {...register("role_name", {required: true})}
+                        />*/
