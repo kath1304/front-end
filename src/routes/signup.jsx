@@ -2,6 +2,14 @@ import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import React from "react";
 import axios from 'axios';
+import LockPersonIcon from '@mui/icons-material/LockPerson';
+import Button from '@mui/material/Button';
+
+
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import {Stack} from "@mui/material";
+
 
 export default function Signup() {
     const token = localStorage.getItem('authentication')
@@ -38,6 +46,7 @@ export default function Signup() {
             })
     }
 
+
     axios.get('http://localhost:3001/validate', {headers: {'authorization': token}})
         .then((response) => {
             if (!response.data) {
@@ -48,130 +57,90 @@ export default function Signup() {
                 return navigate('/paths/user')
             }
         })
-        .catch(e => {console.error(e)})
-    return(
+        .catch(e => {
+            console.error(e)
+        })
+    return (
+
         <div className="App">
             <form onSubmit={handleSubmit(onSubmit)}>
 
-                <div className="form-control">
-                    <label>Username</label>
-                    <input type="text" name="username" {...register("username", {required: true})} />
-                </div>
+                <LockPersonIcon fontSize="large" color={"secondary"}/>
 
-                <div className="form-control">
-                    <label>Firstname</label>
-                    <input type="text" name="firstname" {...register("firstname", {required: true})} />
-                </div>
+                <Box
+                    component="form"
+                    sx={{
+                        '& .MuiTextField-root': {m: 0.5, width: '25ch'},
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    <div>
+                        <TextField
+                            id="outlined-username-input"
+                            label="Username"
+                            type="username"
+                            autoComplete="current-username"
 
-                <div className="form-control">
-                    <label>Lastname</label>
-                    <input type="text" name="lastname" {...register("lastname", {required: true})} />
-                </div>
+                        />
+                    </div>
 
-                <div className="form-control">
-                    <label>Email</label>
-                    <input type="text" name="email" {...register("email", {required: true})} />
-                </div>
+                    <div>
+                        <TextField
+                            id="outlined-firstname-input"
+                            label="First Name"
+                            type="firstname"
+                            autoComplete="current-firstname"
+                        />
+                    </div>
+
+                    <div>
+                        <TextField
+                            id="outlined-lastname-input"
+                            label="Last Name"
+                            type="lastname"
+                            autoComplete="current-lastname"
+                        />
+                    </div>
+
+                    <div>
+                        <TextField
+                            id="outlined-email-input"
+                            label="E - mail"
+                            type="email"
+                            autoComplete="current-email"
+                        />
+                    </div>
+
+                    <div>
+                        <TextField
+                            id="outlined-password-input"
+                            label="Password"
+                            type="password"
+                            autoComplete="current-password"
+                        />
+                    </div>
+
+                    <div>
+                        <TextField
+                            id="outlined-role-input"
+                            label="Role"
+                            type="role"
+                            autoComplete="current-role"
+                        />
+                    </div>
 
 
-                <div className="form-control">
-                    <label>Password</label>
-                    <input type="password" name="password" {...register("password", {required:true})} />
-                </div>
+                </Box>
+                <Stack spacing={2} direction="row-reverse">
+                    <Button
+                        variant="contained"
+                        color={"secondary"}> Sign Up</Button>
+                </Stack>
 
-                <div className="form-control">
-                    <label></label>
-                    <button type="submit">Sign Up</button>
-                </div>
             </form>
         </div>
     )
-
-
-   /* <Container component="main" maxWidth="xs">
-        <CssBaseline/>
-        <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-                <LockOutlinedIcon/>
-            </Avatar>
-            <Typography component="h1" variant="h5">
-                Signup up
-            </Typography>
-            <form className={classes.form} noValidate>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            autoComplete="fname"
-                            name="firstName"
-                            variant="outlined"
-                            required
-                            fullWidth
-                            id="firstName"
-                            label="First Name"
-                            autoFocus
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            fullWidth
-                            id="lastName"
-                            label="Last Name"
-                            name="lastName"
-                            autoComplete="lname"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <FormControlLabel
-                            control={<Checkbox value="allowExtraEmails" color="primary"/>}
-                            label="I want to receive inspiration, marketing promotions and updates via email."
-                        />
-                    </Grid>
-                </Grid>
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                >
-                    Signup Up
-                </Button>
-                <Grid container justifyContent="flex-end">
-                    <Grid item>
-                        <Link href="#" variant="body2">
-                            Already have an account? Signup in
-                        </Link>
-                    </Grid>
-                </Grid>
-            </form>
-        </div>
-    </Container>
-);*/
 
 
 }
