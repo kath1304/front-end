@@ -127,7 +127,7 @@ export default function ShowUsers() {
                 </TableHead>
                 <TableBody>
                     {users?.map((user) => (
-                        <StyledTableRow key={user.name}>
+                        <StyledTableRow key={user.username}>
                             <StyledTableCell component="th" scope="row" align="right">{user?.username}
                             </StyledTableCell>
                             <StyledTableCell align="right">{user?.firstname}</StyledTableCell>

@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {Stack} from "@mui/material";
+import {Input, Stack} from "@mui/material";
 
 
 export default function Signup() {
@@ -25,7 +25,8 @@ export default function Signup() {
             firstname: '',
             lastname: '',
             email: '',
-            password: ''
+            password: '',
+            role: '',
         }
     });
 
@@ -36,10 +37,10 @@ export default function Signup() {
             lastname: data.lastname,
             email: data.email,
             password: data.password,
+            role_name: data.role_name,
         }, {headers: {'authorization': token, 'role': role}})
             .then(() => {
-                return navigate('/paths/checkUser')
-                //add sending user
+                return navigate('/paths/checkUser', {state:{user: data.username}})
             })
             .catch((error) => {
                 console.error(error)
@@ -79,9 +80,9 @@ export default function Signup() {
                         <TextField
                             id="outlined-username-input"
                             label="Username"
-                            type="username"
+                            name="username"
                             autoComplete="current-username"
-
+                            {...register("username", {required: true})}
                         />
                     </div>
 
@@ -89,8 +90,9 @@ export default function Signup() {
                         <TextField
                             id="outlined-firstname-input"
                             label="First Name"
-                            type="firstname"
+                            name="firstname"
                             autoComplete="current-firstname"
+                            {...register("firstname", {required: true})}
                         />
                     </div>
 
@@ -98,8 +100,9 @@ export default function Signup() {
                         <TextField
                             id="outlined-lastname-input"
                             label="Last Name"
-                            type="lastname"
+                            name="lastname"
                             autoComplete="current-lastname"
+                            {...register("lastname", {required: true})}
                         />
                     </div>
 
@@ -107,8 +110,9 @@ export default function Signup() {
                         <TextField
                             id="outlined-email-input"
                             label="E - mail"
-                            type="email"
+                            name="email"
                             autoComplete="current-email"
+                            {...register("email", {required: true})}
                         />
                     </div>
 
@@ -117,7 +121,9 @@ export default function Signup() {
                             id="outlined-password-input"
                             label="Password"
                             type="password"
+                            name="password"
                             autoComplete="current-password"
+                            {...register("password", {required: true})}
                         />
                     </div>
 
@@ -125,8 +131,9 @@ export default function Signup() {
                         <TextField
                             id="outlined-role-input"
                             label="Role"
-                            type="role"
+                            name="role"
                             autoComplete="current-role"
+                            {...register("role_name", {required: true})}
                         />
                     </div>
 
@@ -135,6 +142,7 @@ export default function Signup() {
                 <Stack spacing={2} direction="row-reverse">
                     <Button
                         variant="contained"
+                        type="submit"
                         color={"secondary"}> Sign Up</Button>
                 </Stack>
 
