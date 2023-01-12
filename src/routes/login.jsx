@@ -2,6 +2,17 @@ import React from "react";
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+
+export let intervalId
+
+const autoRenew = () => {
+    axios.get('http://localhost:3001/renewToken', {headers: {'authorization': localStorage.getItem('authentication')}})
+        .then((response) => {
+            localStorage.setItem("authentication", "Bearer " + response.data.token)
+            localStorage.setItem("role", response.data.role)
+        })
+        .catch(e => {console.error(e)})
+}
 export default function Login() {
     const oldToken = localStorage.getItem('authentication')
     const navigate = useNavigate()
@@ -20,9 +31,9 @@ export default function Login() {
         .then((response) => {
             if(response.data) {
                 if (localStorage.getItem('role') === 'admin') {
-                    return navigate('/admin')
+                    return navigate('/paths/admin')
                 } else if (localStorage.getItem('role') === 'user') {
-                    return navigate('/user')
+                    return navigate('/paths/user')
                 }
             }
         })
@@ -35,11 +46,12 @@ export default function Login() {
             .then((response) => {
                 localStorage.setItem("authentication", "Bearer " + response.data.token)
                 localStorage.setItem("role", response.data.role)
+                intervalId = setInterval(autoRenew, 3480000)
                 if(response.data.role === 'admin') {
-                    return navigate('/admin')
+                    return navigate('/paths/admin')
                 }
                 else {
-                    return navigate('/user')
+                    return navigate('/paths/user')
                 }
             })
             .catch((e) => {

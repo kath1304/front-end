@@ -15,6 +15,7 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
+import Root from "./routes/root";
 
 
 const router = createBrowserRouter([
@@ -23,33 +24,40 @@ const router = createBrowserRouter([
         element: <Login />,
     },
     {
-        path: "/admin",
-        element: <Admin />
+        path: "/paths",
+        element: <Root />,
+        children: [
+            {
+                path: "/paths/admin",
+                element: <Admin />
+            },
+            {
+                path: "/paths/user",
+                element: <User />
+            },
+            {
+                path: "/paths/showDatabase",
+                element: <ShowUsers />
+            },
+            {
+                path: "/paths/sign",
+                element: <Signup />
+            },
+            {
+                path: "/paths/modifyUser",
+                element: <ModifyUser />
+            },
+            {
+                path: "/paths/deleteUser",
+                element: <DeleteUser />
+            },
+            {
+                path: "/paths/checkUser",
+                element: <CheckUser />
+            },
+        ],
     },
-    {
-        path: "/user",
-        element: <User />
-    },
-    {
-        path: "/showDatabase",
-        element: <ShowUsers />
-    },
-    {
-        path: "/sign",
-        element: <Signup />
-    },
-    {
-        path: "/modifyUser",
-        element: <ModifyUser />
-    },
-    {
-        path: "/deleteUser",
-        element: <DeleteUser />
-    },
-    {
-        path: "/checkUser",
-        element: <CheckUser />
-    },
+
 ])
 
 

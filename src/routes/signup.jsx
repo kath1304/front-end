@@ -22,12 +22,6 @@ export default function Signup() {
     });
 
     const onSubmit = (data) => {
-        console.log(data.firstname)
-        console.log(role)
-        if (role === 'user') {
-            console.log('stop you cannot access');
-            return navigate('/user')
-        }
         axios.post('http://localhost:3001/users/', {
             username: data.username,
             firstname: data.firstname,
@@ -36,7 +30,7 @@ export default function Signup() {
             password: data.password,
         }, {headers: {'authorization': token, 'role': role}})
             .then(() => {
-                return navigate('/checkUser')
+                return navigate('/paths/checkUser')
                 //add sending user
             })
             .catch((error) => {
@@ -48,6 +42,10 @@ export default function Signup() {
         .then((response) => {
             if (!response.data) {
                 return navigate('/')
+            }
+            if (role === 'user') {
+                console.log('stop you cannot access');
+                return navigate('/paths/user')
             }
         })
         .catch(e => {console.error(e)})

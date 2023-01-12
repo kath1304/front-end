@@ -6,14 +6,17 @@ import {useNavigate} from "react-router-dom";
 export default function ShowUsers() {
     const navigate = useNavigate()
     const token = localStorage.getItem('authentication')
+    const role = localStorage.getItem('role')
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:3001/validate', {headers: {'authorization': token}})
             .then((response) => {
-                console.log(response.data)
                 if (!response.data) {
                     return navigate('/')
+                }
+                if (role !== "admin") {
+                    return navigate('/paths/user')
                 }
                 fetchUsers();
             })
@@ -35,11 +38,11 @@ export default function ShowUsers() {
     }
 
     const handleClickModify = (username) => {
-        navigate('/modifyUser', {state:{user: username}})
+        navigate('/paths/modifyUser', {state:{user: username}})
     }
 
     const handleClickDelete = (username) => {
-        navigate('/deleteUser', {state:{user: username}})
+        navigate('/paths/deleteUser', {state:{user: username}})
     }
 
     return (

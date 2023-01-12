@@ -14,15 +14,15 @@ export default function Admin() {
     const role = localStorage.getItem('role');
     if (role !== 'admin') {
         console.log('stop you cannot access');
-        return navigate('/')
+        return navigate('/paths/user')
     }
 
     return(
         <div>
-            <Link to = "/showDatabase">
+            <Link to = "/paths/showDatabase">
                 <button type="button">Show users</button>
             </Link>
-            <Link to = "/sign">
+            <Link to = "/paths/sign">
                 <button type="button">Sign up user</button>
             </Link>
         </div>

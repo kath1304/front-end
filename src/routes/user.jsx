@@ -24,7 +24,7 @@ export default function User() {
                     return navigate('/')
                 }
                 if (role !== "user") {
-                    return navigate('/admin')
+                    return navigate('/paths/admin')
                 }
                 axios.get('http://localhost:3001/loggedSessions/', {headers: {'authorization': token}})
                     .then((response) => {
