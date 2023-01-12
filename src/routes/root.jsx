@@ -28,6 +28,13 @@ function handleClickLogout() {
         })
         .catch(e => {console.error(e)})
 }
+function handleClickHome() {
+    let role = localStorage.getItem('role')
+    if(role === 'admin') {
+        return navigate('/paths/admin')
+    }
+    return navigate('/paths/user')
+}
 
 export default function Root() {
     navigate = useNavigate()
@@ -42,7 +49,7 @@ export default function Root() {
                         color="inherit"
                         aria-label="menu"
                         sx={{ mr: 2 }}
-                        //add click handler
+                        onClick= {() => {handleClickHome()}}
                     >
                         <HomeIcon />
                     </IconButton>
