@@ -1,6 +1,6 @@
 import {useForm} from "react-hook-form";
 import {useNavigate, useLocation} from "react-router-dom";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect} from "react";
 import axios from 'axios';
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import Typography from "@mui/material/Typography";
@@ -14,8 +14,23 @@ import EditIcon from "@mui/icons-material/Edit";
 export default function ModifyUser() {
     const location = useLocation();
     const navigate = useNavigate()
+    const token = localStorage.getItem('authentication')
+    const loggedUser = localStorage.getItem('username')
+    const role = localStorage.getItem('role');
     useEffect(() => {
-        fetchUser();
+        axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': token}})
+            .then((response) => {
+                if (!response.data) {
+                    return navigate('/')
+                }
+                if (role !== "admin") {
+                    return navigate('/paths/user')
+                }
+                fetchUser();
+            })
+            .catch(e => {
+                console.error(e)
+            });
     }, []);
     const {
         register,
@@ -34,7 +49,6 @@ export default function ModifyUser() {
     });
 
     const fetchUser = useCallback(() => {
-        const token = localStorage.getItem('authentication')
         console.log(location.state.user)
         axios
             .get('http://localhost:3001/users/' + location.state.user, {headers: {'authorization': token}})
@@ -54,8 +68,6 @@ export default function ModifyUser() {
     };
 
     const onSubmit = useCallback((data) => {
-        const token = localStorage.getItem('authentication')
-        const role = localStorage.getItem('role');
         console.log(data.firstname)
         console.log(role)
         if (role === 'user') {

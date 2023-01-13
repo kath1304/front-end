@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import SvgIcon from '@mui/material/SvgIcon';
 import axios from "axios";
 import {Outlet, useNavigate} from "react-router-dom";
+import {intervalId} from "./login";
 
 let navigate
 
@@ -25,6 +26,7 @@ function handleClickLogout() {
             localStorage.removeItem('authentication')
             localStorage.removeItem('role')
             localStorage.removeItem('username')
+            clearInterval(intervalId)
             return navigate('/')
         })
         .catch(e => {

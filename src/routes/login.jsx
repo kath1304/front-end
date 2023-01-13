@@ -23,6 +23,7 @@ const autoRenew = () => {
 }
 export default function Login() {
     const oldToken = localStorage.getItem('authentication')
+    const loggedUser = localStorage.getItem('username')
     const navigate = useNavigate()
     const {
         register,
@@ -35,7 +36,7 @@ export default function Login() {
         }
     });
 
-    axios.get('http://localhost:3001/validate', {headers: {'authorization': oldToken}})
+    axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': oldToken}})
         .then((response) => {
             if (response.data) {
                 if (localStorage.getItem('role') === 'admin') {
@@ -44,20 +45,8 @@ export default function Login() {
                     return navigate('/paths/user')
                 }
             }
-            let user = localStorage.getItem("username")
-            if (user) {
-                axios.post('http://localhost:3001/logout/delete', {username: user})
-                    .then(() => {
-                        console.log('sessione eliminata')
-                    })
-                    .catch(e => {
-                        console.error(e)
-                    })
-            }
         })
-        .catch(e => {
-            console.error(e)
-        })
+        .catch(e => {console.error(e)})
 
 
     const onSubmit = (data) => {
@@ -68,9 +57,10 @@ export default function Login() {
                 localStorage.setItem("role", response.data.role)
                 localStorage.setItem("username", response.data.username)
                 intervalId = setInterval(autoRenew, 3480000)
-                if (response.data.role === 'admin') {
+                if(response.data.role === 'admin') {
                     return navigate('/paths/admin')
-                } else {
+                }
+                else {
                     return navigate('/paths/user')
                 }
             })

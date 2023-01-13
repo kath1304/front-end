@@ -13,16 +13,29 @@ import Divider from '@mui/material/Divider';
 import PersonIcon from '@mui/icons-material/Person';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import EngineeringIcon from '@mui/icons-material/Engineering';
-
+import {useNavigate} from 'react-router-dom';
 export default function CheckUser() {
-
+    const navigate = useNavigate();
     const token = localStorage.getItem('authentication')
     const location = useLocation();
+    const loggedUser = localStorage.getItem('username')
 
 
     const [user, setUser] = useState([]);
     useEffect(() => {
-        fetchUser();
+        axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': token}})
+            .then((response) => {
+                if (!response.data) {
+                    return navigate('/')
+                }
+                if (localStorage.getItem('role') !== "admin") {
+                    return navigate('/paths/user')
+                }
+                fetchUser();
+            })
+            .catch(e => {
+                console.error(e)
+            });
     }, []);
 
     const fetchUser = () => {
@@ -93,4 +106,6 @@ export default function CheckUser() {
             </List>
         </div>
     );
+
+
 }

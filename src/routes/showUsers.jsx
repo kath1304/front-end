@@ -33,6 +33,7 @@ export default function ShowUsers() {
 
     const navigate = useNavigate()
     const token = localStorage.getItem('authentication')
+    const loggedUser = localStorage.getItem('username')
     const role = localStorage.getItem('role')
     const [users, setUsers] = useState([]);
 
@@ -64,7 +65,7 @@ export default function ShowUsers() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:3001/validate', {headers: {'authorization': token}})
+        axios.post('http://localhost:3001/validate', {username: loggedUser},{headers: {'authorization': token}})
             .then((response) => {
                 if (!response.data) {
                     return navigate('/')

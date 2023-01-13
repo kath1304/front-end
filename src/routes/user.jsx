@@ -15,10 +15,11 @@ export default function User() {
     const navigate = useNavigate()
     const role = localStorage.getItem('role')
     const token = localStorage.getItem('authentication')
+    const loggedUser = localStorage.getItem('username')
     const [rows, setRows] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:3001/validate', {headers: {'authorization': token}})
+        axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': token}})
             .then((response) => {
                 if (!response.data) {
                     return navigate('/')

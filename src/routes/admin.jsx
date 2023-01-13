@@ -14,18 +14,22 @@ Item.propTypes = {children: PropTypes.node};
 export default function Admin() {
     const navigate = useNavigate()
     const token = localStorage.getItem('authentication')
-    axios.get('http://localhost:3001/validate', {headers: {'authorization': token}})
+    const loggedUser = localStorage.getItem('username')
+
+    axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': token}})
         .then((response) => {
             if (!response.data) {
                 return navigate('/')
             }
+            const role = localStorage.getItem('role');
+            if (role !== 'admin') {
+                console.log('stop you cannot access');
+                return navigate('/paths/user')
+            }
         })
-        .catch(e => {console.error(e)})
-    const role = localStorage.getItem('role');
-    if (role !== 'admin') {
-        console.log('stop you cannot access');
-        return navigate('/paths/user')
-    }
+        .catch(e => {
+            console.error(e)
+        })
 
     const handleClickShowUsers = () => {
         navigate('/paths/showDatabase')
