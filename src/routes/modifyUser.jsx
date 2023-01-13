@@ -2,8 +2,6 @@ import {useForm} from "react-hook-form";
 import {useNavigate, useLocation} from "react-router-dom";
 import React, {useCallback, useEffect} from "react";
 import axios from 'axios';
-import LockPersonIcon from "@mui/icons-material/LockPerson";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import {FormControl, InputLabel, MenuItem, Select, Stack} from "@mui/material";
@@ -191,6 +189,14 @@ export default function ModifyUser() {
                         type="submit"
                         color={"secondary"}> Modify</Button>
                 </Stack>
+
+                <Button onClick={() => {
+                    navigate('/paths/showUsers');
+                }}
+                    variant="contained"
+                    type="submit"
+                    color={"secondary"}> Back
+                </Button>
 
             </form>
         </div>

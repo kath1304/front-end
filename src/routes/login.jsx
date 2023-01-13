@@ -46,7 +46,9 @@ export default function Login() {
                 }
             }
         })
-        .catch(e => {console.error(e)})
+        .catch(e => {
+            console.error(e)
+        })
 
 
     const onSubmit = (data) => {
@@ -57,10 +59,9 @@ export default function Login() {
                 localStorage.setItem("role", response.data.role)
                 localStorage.setItem("username", response.data.username)
                 intervalId = setInterval(autoRenew, 3480000)
-                if(response.data.role === 'admin') {
+                if (response.data.role === 'admin') {
                     return navigate('/paths/admin')
-                }
-                else {
+                } else {
                     return navigate('/paths/user')
                 }
             })
@@ -72,39 +73,50 @@ export default function Login() {
     return (
         <div className="App">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <AccountCircleIcon fontSize={"large"} color={"secondary"} />
 
-                    <Box
-                        sx={{
-                            '& .MuiTextField-root': {m: 0.8, width: '25ch'},
-                        }}
-                        noValidate
-                        autoComplete="off"
-                    >
-                        <div>
-                            <TextField
-                                id="outlined-username-input"
-                                label="Username"
-                                name="username"
-                                autoComplete="current-username"
-                                size={"medium"}
-                                {...register("username", {required: true})}
-                            />
-                        </div>
+                <div style={{textAlign: "center"}}>
+                    <AccountCircleIcon fontSize={"large"} color={"secondary"}
+                    />
 
-                        <div>
-                            <TextField
-                                id="outlined-password-input"
-                                label="Password"
-                                name="password"
-                                type="password"
-                                autoComplete="current-password"
-                                size={"medium"}
-                                {...register("password", {required: true})}
-                            />
-                        </div>
+                </div>
 
-                    </Box>
+                <div style={{textAlign: "center"}}>
+                    REGISTER
+                </div>
+                <Box
+                    sx={{
+                        '& .MuiTextField-root': {m: 0.8, width: '25ch'},
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    <div>
+                        <TextField
+                            id="outlined-username-input"
+                            label="Username"
+                            name="username"
+                            autoComplete="current-username"
+                            size={"medium"}
+                            {...register("username", {required: true})}
+                        />
+                    </div>
+
+                    <div>
+                        <TextField
+                            id="outlined-password-input"
+                            label="Password"
+                            name="password"
+                            type="password"
+                            autoComplete="current-password"
+                            size={"medium"}
+                            {...register("password", {required: true})}
+                        />
+                    </div>
+
 
                     <Stack spacing={2} direction="row-reverse">
                         <Button
@@ -112,7 +124,7 @@ export default function Login() {
                             type="submit"
                             color={"secondary"}> Login </Button>
                     </Stack>
-
+                </Box>
             </form>
         </div>
     )
