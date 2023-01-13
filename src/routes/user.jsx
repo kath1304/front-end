@@ -2,7 +2,7 @@ import React from "react";
 import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, {tableCellClasses} from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import {useEffect} from 'react';
 import {useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import {styled} from "@mui/material/styles";
 
 export default function User() {
     const navigate = useNavigate()
@@ -17,6 +18,16 @@ export default function User() {
     const token = localStorage.getItem('authentication')
     const loggedUser = localStorage.getItem('username')
     const [rows, setRows] = useState([])
+
+    const StyledTableCell = styled(TableCell)(({theme}) => ({
+        [`&.${tableCellClasses.head}`]: {
+            backgroundColor: "#9c27b0",
+            color: theme.palette.common.white
+        },
+        [`&.${tableCellClasses.body}`]: {
+            fontSize: 16,
+        },
+    }));
 
     useEffect(() => {
         axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': token}})
@@ -46,8 +57,8 @@ export default function User() {
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Users</TableCell>
-                            <TableCell align="right">Session</TableCell>
+                            <StyledTableCell>USERS</StyledTableCell>
+                            <StyledTableCell align="right">SESSION</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -56,10 +67,12 @@ export default function User() {
                                 key={row.user_username}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
-                                <TableCell component="th" scope="row">
-                                    {row.user_username}
+                                <TableCell component="th" scope="row" >
+                                    <h3>{row.user_username}</h3>
                                 </TableCell>
-                                <TableCell align="right">{row.access_date}</TableCell>
+                                <TableCell align="right">
+                                    <h3>{row.access_date}</h3>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

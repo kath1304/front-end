@@ -54,7 +54,7 @@ export default function CheckUser() {
 
         <div className="App">
 
-            <h2>Riepilogo informazioni per l'utente {user?.username}</h2>
+            <h2>Recap user {user?.username} data</h2>
 
             <List
                 sx={{
