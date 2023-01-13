@@ -39,7 +39,7 @@ export default function User() {
                 console.error(e)
             })
 
-    })
+    }, [])
     return (
         <div className="App">
             <TableContainer component={Paper}>
