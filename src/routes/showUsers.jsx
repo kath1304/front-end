@@ -121,11 +121,11 @@ export default function ShowUsers() {
             <Table sx={{minWidth: 700}} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell align="centre">USERNAME</StyledTableCell>
-                        <StyledTableCell align="centre">FIRST NAME</StyledTableCell>
-                        <StyledTableCell align="centre">LAST NAME</StyledTableCell>
-                        <StyledTableCell align="centre">E - MAIL</StyledTableCell>
-                        <StyledTableCell align="centre">ROLE</StyledTableCell>
+                        <StyledTableCell align="center">USERNAME</StyledTableCell>
+                        <StyledTableCell align="center">FIRST NAME</StyledTableCell>
+                        <StyledTableCell align="center">LAST NAME</StyledTableCell>
+                        <StyledTableCell align="center">E - MAIL</StyledTableCell>
+                        <StyledTableCell align="center">ROLE</StyledTableCell>
                         <StyledTableCell align="center" colSpan="2">EDIT</StyledTableCell>
                     </TableRow>
                 </TableHead>

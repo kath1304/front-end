@@ -32,7 +32,7 @@ export default function Admin() {
         })
 
     const handleClickShowUsers = () => {
-        navigate('/paths/showDatabase')
+        navigate('/paths/showUsers')
     }
 
     const handleClickSignUp = () => {

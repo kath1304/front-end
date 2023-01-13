@@ -82,7 +82,7 @@ export default function ModifyUser() {
             role_name: data.role_name,
         }, {headers: {'authorization': token, 'role': role}})
             .then((response) => {
-                return navigate('/paths/showDatabase')
+                return navigate('/paths/showUsers')
             })
             .catch((error) => {
                 console.error(error)
