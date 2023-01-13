@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {InputLabel, MenuItem, Select, Stack} from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 
 export default function Signup() {
@@ -73,6 +74,7 @@ export default function Signup() {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <LockPersonIcon fontSize="large" color={"secondary"}/>
+                 <Typography variant="h5"> Registration  </Typography>
 
                 <Box
                     sx={{

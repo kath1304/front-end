@@ -14,7 +14,7 @@ let navigate
 function HomeIcon(props) {
     return (
         <SvgIcon {...props}>
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
         </SvgIcon>
     );
 }
@@ -27,11 +27,14 @@ function handleClickLogout() {
             localStorage.removeItem('username')
             return navigate('/')
         })
-        .catch(e => {console.error(e)})
+        .catch(e => {
+            console.error(e)
+        })
 }
+
 function handleClickHome() {
     let role = localStorage.getItem('role')
-    if(role === 'admin') {
+    if (role === 'admin') {
         return navigate('/paths/admin')
     }
     return navigate('/paths/user')
@@ -41,7 +44,7 @@ export default function Root() {
     navigate = useNavigate()
     //add render name, surname
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
@@ -49,16 +52,20 @@ export default function Root() {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2 }}
-                        onClick= {() => {handleClickHome()}}
+                        sx={{mr: 2}}
+                        onClick={() => {
+                            handleClickHome()
+                        }}
                     >
-                        <HomeIcon />
+                        <HomeIcon/>
                     </IconButton>
-                    <Button color="inherit" onClick= {() => {handleClickLogout()}}>Logout</Button>
+                    <Button color="inherit" onClick={() => {
+                        handleClickLogout()
+                    }}>Log out</Button>
                 </Toolbar>
             </AppBar>
             <div id="detail">
-                <Outlet />
+                <Outlet/>
             </div>
         </Box>
     );

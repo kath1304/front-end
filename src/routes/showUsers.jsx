@@ -13,6 +13,9 @@ import {Modal} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete"
+import SendIcon from "@mui/icons-material/Send"
+import EditIcon from '@mui/icons-material/Edit';
 
 const style = {
     position: 'absolute',
@@ -89,22 +92,22 @@ export default function ShowUsers() {
     }
 
     const handleClickModify = (username) => {
-        navigate('/paths/modifyUser', {state:{user: username}})
+        navigate('/paths/modifyUser', {state: {user: username}})
     }
 
     const StyledTableCell = styled(TableCell)(({theme}) => ({
         [`&.${tableCellClasses.head}`]: {
-            backgroundColor: theme.palette.common.black,
-            color: theme.palette.common.white,
+            backgroundColor: "#9c27b0",
+            color: theme.palette.common.white
         },
         [`&.${tableCellClasses.body}`]: {
-            fontSize: 14,
+            fontSize: 16,
         },
     }));
 
     const StyledTableRow = styled(TableRow)(({theme}) => ({
         '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
+            backgroundColor: "theme.palette.action.hover",
         },
         // hide last border
         '&:last-child td, &:last-child th': {
@@ -117,33 +120,41 @@ export default function ShowUsers() {
             <Table sx={{minWidth: 700}} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell align="right">username</StyledTableCell>
-                        <StyledTableCell align="right">firstname</StyledTableCell>
-                        <StyledTableCell align="right">lastname</StyledTableCell>
-                        <StyledTableCell align="right">email</StyledTableCell>
-                        <StyledTableCell align="right">role</StyledTableCell>
-                        <StyledTableCell align="center" colSpan="2">edit</StyledTableCell>
+                        <StyledTableCell align="centre">USERNAME</StyledTableCell>
+                        <StyledTableCell align="centre">FIRST NAME</StyledTableCell>
+                        <StyledTableCell align="centre">LAST NAME</StyledTableCell>
+                        <StyledTableCell align="centre">E - MAIL</StyledTableCell>
+                        <StyledTableCell align="centre">ROLE</StyledTableCell>
+                        <StyledTableCell align="center" colSpan="2">EDIT</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {users?.map((user) => (
                         <StyledTableRow key={user.username}>
-                            <StyledTableCell component="th" scope="row" align="right">{user?.username}
+                            <StyledTableCell component="th" scope="row" align="left">{user?.username}
                             </StyledTableCell>
-                            <StyledTableCell align="right">{user?.firstname}</StyledTableCell>
-                            <StyledTableCell align="right">{user?.lastname}</StyledTableCell>
-                            <StyledTableCell align="right">{user?.email}</StyledTableCell>
-                            <StyledTableCell align="right">{user?.role_name}</StyledTableCell>
+                            <StyledTableCell align="left">{user?.firstname}</StyledTableCell>
+                            <StyledTableCell align="left">{user?.lastname}</StyledTableCell>
+                            <StyledTableCell align="left">{user?.email}</StyledTableCell>
+                            <StyledTableCell align="left">{user?.role_name}</StyledTableCell>
+
                             <StyledTableCell align="right">
-                                <button onClick={() => {
+                                <Button onClick={() => {
                                     handleOpen(user?.username)
-                                }}>delete
-                                </button>
+                                }} variant="outlined" startIcon={<DeleteIcon/>} color={"error"}>
+                                    Delete
+                                </Button>
                             </StyledTableCell>
-                            <StyledTableCell align="right"><button onClick={() => {
-                                handleClickModify(user?.username)
-                            }}>modify
-                            </button></StyledTableCell>
+
+                            <StyledTableCell align="right">
+                                <Button onClick={() => {
+                                    handleClickModify(user?.username)
+                                }} variant="outlined" startIcon={<EditIcon/>} color={"primary"}>
+                                    Modify
+                                </Button>
+                            </StyledTableCell>
+
+
                         </StyledTableRow>
                     ))}
                 </TableBody>
@@ -156,11 +167,11 @@ export default function ShowUsers() {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Confermi rimozione dell'utente {currentUsername}?
+                        Want to delete {currentUsername} user?
                     </Typography>
                     <Typography id="modal-modal-description" sx={{mt: 2}}>
-                        <Button onClick={handleConferma}>Conferma</Button>
-                        <Button onClick={handleClose}>Annulla</Button>
+                        <Button onClick={handleConferma}>Confirm</Button>
+                        <Button onClick={handleClose}>Cancel</Button>
                     </Typography>
                 </Box>
             </Modal>
