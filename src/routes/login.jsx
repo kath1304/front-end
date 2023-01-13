@@ -97,6 +97,7 @@ export default function Login() {
                                 id="outlined-password-input"
                                 label="Password"
                                 name="password"
+                                type="password"
                                 autoComplete="current-password"
                                 size={"medium"}
                                 {...register("password", {required: true})}
