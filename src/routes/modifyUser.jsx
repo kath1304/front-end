@@ -106,7 +106,6 @@ export default function ModifyUser() {
                     <div>
                         <TextField
                             id="outlined-username-input"
-                            label="Username"
                             name="username"
                             autoComplete="current-username"
                             {...register("username", {required: true})}
@@ -116,7 +115,6 @@ export default function ModifyUser() {
                     <div>
                         <TextField
                             id="outlined-firstname-input"
-                            label="First Name"
                             name="firstname"
                             autoComplete="current-firstname"
                             {...register("firstname", {required: true})}
@@ -126,7 +124,6 @@ export default function ModifyUser() {
                     <div>
                         <TextField
                             id="outlined-lastname-input"
-                            label="Last Name"
                             name="lastname"
                             autoComplete="current-lastname"
                             {...register("lastname", {required: true})}
@@ -136,7 +133,6 @@ export default function ModifyUser() {
                     <div>
                         <TextField
                             id="outlined-email-input"
-                            label="E - mail"
                             name="email"
                             autoComplete="current-email"
                             {...register("email", {required: true})}
