@@ -6,7 +6,7 @@ import LockPersonIcon from "@mui/icons-material/LockPerson";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import {InputLabel, MenuItem, Select, Stack} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, Stack} from "@mui/material";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -61,10 +61,9 @@ export default function ModifyUser() {
             });
     }, [reset])
 
-    const [roleName, setRoleName] = React.useState('');
+    const [newRole, setNewRole] = React.useState('');
     const handleChange = (event) => {
-        console.log(event.target.value);
-        setRoleName(event.target.value);
+        setNewRole(event.target.value);
     };
 
     const onSubmit = useCallback((data) => {
@@ -156,18 +155,20 @@ export default function ModifyUser() {
                     </div>
 
                     <div>
-                        <InputLabel id="role-select">Role</InputLabel>
-                        <Select
-                            labelId="role-select"
-                            id="role-select"
-                            value={roleName}
-                            label="Role"
-                            onChange={handleChange}
-                            {...register("role_name", {required: true})}
-                        >
-                            <MenuItem value={'admin'}>Admin</MenuItem>
-                            <MenuItem value={'user'}>User</MenuItem>
-                        </Select>
+                        <FormControl sx={{ minWidth: 120 }}>
+                            <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={newRole}
+                                label="Role"
+                                {...register("role_name", {required: true})}
+                                onChange={handleChange}
+                            >
+                                <MenuItem value={'admin'}>Admin</MenuItem>
+                                <MenuItem value={'user'}>User</MenuItem>
+                            </Select>
+                        </FormControl>
                     </div>
 
 

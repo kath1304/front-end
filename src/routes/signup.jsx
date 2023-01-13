@@ -34,7 +34,6 @@ export default function Signup() {
     const [newRole, setNewRole] = React.useState('');
     const handleChange = (event) => {
         setNewRole(event.target.value);
-        console.log(event.target.value);
     };
 
 
