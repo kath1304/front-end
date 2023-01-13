@@ -107,6 +107,10 @@ export default function ModifyUser() {
                         <TextField
                             id="outlined-username-input"
                             name="username"
+                            label="Username"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                             autoComplete="current-username"
                             {...register("username", {required: true})}
                         />
@@ -116,6 +120,10 @@ export default function ModifyUser() {
                         <TextField
                             id="outlined-firstname-input"
                             name="firstname"
+                            label="First Name"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                             autoComplete="current-firstname"
                             {...register("firstname", {required: true})}
                         />
@@ -125,6 +133,10 @@ export default function ModifyUser() {
                         <TextField
                             id="outlined-lastname-input"
                             name="lastname"
+                            label="Last Name"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                             autoComplete="current-lastname"
                             {...register("lastname", {required: true})}
                         />
@@ -134,6 +146,10 @@ export default function ModifyUser() {
                         <TextField
                             id="outlined-email-input"
                             name="email"
+                            label="E-mail"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                             autoComplete="current-email"
                             {...register("email", {required: true})}
                         />
