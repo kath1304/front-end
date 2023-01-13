@@ -44,7 +44,7 @@ export default function ModifyUser() {
             lastname: '',
             email: '',
             password: '',
-            role: ''
+            role_name: ''
         }
     });
 
@@ -73,7 +73,7 @@ export default function ModifyUser() {
             console.log('stop you cannot access');
         }
 
-        axios.put('http://localhost:3001/' + location.state.user, {
+        axios.put('http://localhost:3001/users/' + location.state.user, {
             username: data.username,
             firstname: data.firstname,
             lastname: data.lastname,
