@@ -1,6 +1,16 @@
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import "../App.css"
+import * as PropTypes from "prop-types";
+import GroupIcon from '@mui/icons-material/Group';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import Button from "@mui/material/Button";
 
+function Item(props) {
+    return null;
+}
+
+Item.propTypes = {children: PropTypes.node};
 export default function Admin() {
     const navigate = useNavigate()
     const token = localStorage.getItem('authentication')
@@ -17,14 +27,28 @@ export default function Admin() {
         return navigate('/paths/user')
     }
 
+    const handleClickShowUsers = () => {
+        navigate('/paths/showDatabase')
+    }
+
+    const handleClickSignUp = () => {
+        navigate('/paths/sign')
+    }
+
     return(
-        <div>
-            <Link to = "/paths/showDatabase">
-                <button type="button">Show users</button>
-            </Link>
-            <Link to = "/paths/sign">
-                <button type="button">Sign up user</button>
-            </Link>
+        <div id="admin-home">
+            <div className="admin-home-square">
+                <Button className="admin-home-selection" onClick={handleClickShowUsers}>
+                    <GroupIcon></GroupIcon>
+                    <div>Show users</div>
+                </Button>
+            </div>
+            <div className="admin-home-square">
+                <Button className="admin-home-selection" onClick={handleClickSignUp}>
+                    <GroupAddIcon></GroupAddIcon>
+                    <div>Sign Up User</div>
+                </Button>
+            </div>
         </div>
     )
 }
