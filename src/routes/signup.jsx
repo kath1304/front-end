@@ -8,13 +8,12 @@ import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {Input, MenuItem, Select, Stack} from "@mui/material";
+import {InputLabel, MenuItem, Select, Stack} from "@mui/material";
 
 
 export default function Signup() {
     const token = localStorage.getItem('authentication')
     const role = localStorage.getItem('role');
-    let newRole
     const navigate = useNavigate()
     const {
         register,
@@ -27,9 +26,14 @@ export default function Signup() {
             lastname: '',
             email: '',
             password: '',
-            role: '',
+            role_name: '',
         }
     });
+    const [roleName, setRoleName] = React.useState('');
+    const handleChange = (event) => {
+        console.log(event.target.value);
+        setRoleName(event.target.value);
+    };
 
 
     const onSubmit = (data) => {
@@ -71,7 +75,6 @@ export default function Signup() {
                 <LockPersonIcon fontSize="large" color={"secondary"}/>
 
                 <Box
-                    component="form"
                     sx={{
                         '& .MuiTextField-root': {m: 0.5, width: '25ch'},
                     }}
@@ -130,12 +133,13 @@ export default function Signup() {
                     </div>
 
                     <div>
-
+                        <InputLabel id="role-select">Role</InputLabel>
                         <Select
-                            labelId="role-input"
-                            id="demo-simple-select"
-                            value={newRole}
+                            labelId="role-select"
+                            id="role-select"
+                            value={roleName}
                             label="Role"
+                            onChange={handleChange}
                             {...register("role_name", {required: true})}
                         >
                             <MenuItem value={'admin'}>Admin</MenuItem>
@@ -155,13 +159,4 @@ export default function Signup() {
             </form>
         </div>
     )
-
-
 }
-/*<TextField
-                            id="outlined-role-input"
-                            label="Role"
-                            name="role"
-                            autoComplete="current-role"
-                            {...register("role_name", {required: true})}
-                        />*/
