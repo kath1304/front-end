@@ -9,6 +9,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import axios from "axios";
 import {Outlet, useNavigate} from "react-router-dom";
 import {intervalId} from "./login";
+import {address} from "../index";
 
 let navigate
 
@@ -21,7 +22,7 @@ function HomeIcon(props) {
 }
 
 function handleClickLogout() {
-    axios.get('http://localhost:3001/logout/', {headers: {'authorization': localStorage.getItem('authentication')}})
+    axios.get(address + '/logout/', {headers: {'authorization': localStorage.getItem('authentication')}})
         .then(() => {
             localStorage.removeItem('authentication')
             localStorage.removeItem('role')

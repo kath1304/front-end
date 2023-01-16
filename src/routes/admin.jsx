@@ -5,6 +5,7 @@ import * as PropTypes from "prop-types";
 import GroupIcon from '@mui/icons-material/Group';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import Button from "@mui/material/Button";
+import {address} from "../index";
 
 function Item(props) {
     return null;
@@ -16,7 +17,7 @@ export default function Admin() {
     const token = localStorage.getItem('authentication')
     const loggedUser = localStorage.getItem('username')
 
-    axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': token}})
+    axios.post(address + '/validate', {username: loggedUser}, {headers: {'authorization': token}})
         .then((response) => {
             if (!response.data) {
                 return navigate('/')

@@ -16,6 +16,8 @@ import {
 } from "react-router-dom";
 import Root from "./routes/root";
 
+export const address = 'http://192.168.1.239:3001'
+
 
 const router = createBrowserRouter([
     {
@@ -45,10 +47,6 @@ const router = createBrowserRouter([
             {
                 path: "/paths/modifyUser",
                 element: <ModifyUser />
-            },
-            {
-                path: "/paths/deleteUser",
-                element: <DeleteUser />
             },
             {
                 path: "/paths/checkUser",

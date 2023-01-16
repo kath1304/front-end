@@ -14,6 +14,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import {useNavigate} from 'react-router-dom';
+import {address} from "../index";
 export default function CheckUser() {
     const navigate = useNavigate();
     const token = localStorage.getItem('authentication')
@@ -23,7 +24,7 @@ export default function CheckUser() {
 
     const [user, setUser] = useState([]);
     useEffect(() => {
-        axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': token}})
+        axios.post(address + '/validate', {username: loggedUser}, {headers: {'authorization': token}})
             .then((response) => {
                 if (!response.data) {
                     return navigate('/')
@@ -40,7 +41,7 @@ export default function CheckUser() {
 
     const fetchUser = () => {
         axios
-            .get(`http://localhost:3001/users/${location.state.user}`, {headers: {'authorization': token}})
+            .get(address + `/users/${location.state.user}`, {headers: {'authorization': token}})
             .then((res) => {
                 console.log(res);
                 setUser(res.data);

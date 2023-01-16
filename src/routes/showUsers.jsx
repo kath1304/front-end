@@ -16,6 +16,7 @@ import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete"
 import SendIcon from "@mui/icons-material/Send"
 import EditIcon from '@mui/icons-material/Edit';
+import {address} from "../index";
 
 const style = {
     position: 'absolute',
@@ -53,7 +54,7 @@ export default function ShowUsers() {
 
     const handleConferma = () => {
         axios
-            .delete('http://localhost:3001/users/' + currentUsername, {headers: {'authorization': localStorage.getItem('authentication')}})
+            .delete(address + '/users/' + currentUsername, {headers: {'authorization': localStorage.getItem('authentication')}})
             .then(() => {
                 setUsers(users.filter(user => user.username !== currentUsername))
                 setCurrentUsername(null)
@@ -65,7 +66,7 @@ export default function ShowUsers() {
     }
 
     useEffect(() => {
-        axios.post('http://localhost:3001/validate', {username: loggedUser},{headers: {'authorization': token}})
+        axios.post(address + '/validate', {username: loggedUser},{headers: {'authorization': token}})
             .then((response) => {
                 if (!response.data) {
                     return navigate('/')
@@ -82,7 +83,7 @@ export default function ShowUsers() {
 
     const fetchUsers = () => {
         axios
-            .get('http://localhost:3001/users/', {headers: {'authorization': token}})
+            .get(address + '/users/', {headers: {'authorization': token}})
             .then((res) => {
                 console.log(res);
                 setUsers(res.data);

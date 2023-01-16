@@ -8,11 +8,12 @@ import TextField from "@mui/material/TextField";
 import {Stack} from "@mui/material";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import {address} from "../index";
 
 export let intervalId
 
 const autoRenew = () => {
-    axios.get('http://localhost:3001/renewToken', {headers: {'authorization': localStorage.getItem('authentication')}})
+    axios.get(address + '/renewToken', {headers: {'authorization': localStorage.getItem('authentication')}})
         .then((response) => {
             localStorage.setItem("authentication", "Bearer " + response.data.token)
             localStorage.setItem("role", response.data.role)
@@ -36,7 +37,7 @@ export default function Login() {
         }
     });
 
-    axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': oldToken}})
+    axios.post(address + '/validate', {username: loggedUser}, {headers: {'authorization': oldToken}})
         .then((response) => {
             if (response.data) {
                 if (localStorage.getItem('role') === 'admin') {
@@ -53,7 +54,7 @@ export default function Login() {
 
     const onSubmit = (data) => {
         console.log(data.username)
-        axios.post('http://localhost:3001/login/auth', {username: data.username, password: data.password})
+        axios.post(address + '/login/auth', {username: data.username, password: data.password})
             .then((response) => {
                 localStorage.setItem("authentication", "Bearer " + response.data.token)
                 localStorage.setItem("role", response.data.role)

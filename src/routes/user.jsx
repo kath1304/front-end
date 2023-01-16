@@ -11,6 +11,7 @@ import {useEffect} from 'react';
 import {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {styled} from "@mui/material/styles";
+import {address} from "../index";
 
 export default function User() {
     const navigate = useNavigate()
@@ -30,7 +31,7 @@ export default function User() {
     }));
 
     useEffect(() => {
-        axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': token}})
+        axios.post(address + '/validate', {username: loggedUser}, {headers: {'authorization': token}})
             .then((response) => {
                 if (!response.data) {
                     return navigate('/')
@@ -38,7 +39,7 @@ export default function User() {
                 if (role !== "user") {
                     return navigate('/paths/admin')
                 }
-                axios.get('http://localhost:3001/loggedSessions/', {headers: {'authorization': token}})
+                axios.get(address + '/loggedSessions/', {headers: {'authorization': token}})
                     .then((response) => {
                         setRows(response.data)
                     })

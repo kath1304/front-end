@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {FormControl, InputLabel, MenuItem, Select, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
+import {address} from "../index";
 
 
 export default function Signup() {
@@ -38,7 +39,7 @@ export default function Signup() {
 
 
     const onSubmit = (data) => {
-        axios.post('http://localhost:3001/users/', {
+        axios.post(address + '/users/', {
             username: data.username,
             firstname: data.firstname,
             lastname: data.lastname,
@@ -55,7 +56,7 @@ export default function Signup() {
     }
 
 
-    axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': token}})
+    axios.post(address + '/validate', {username: loggedUser}, {headers: {'authorization': token}})
         .then((response) => {
             if (!response.data) {
                 return navigate('/')

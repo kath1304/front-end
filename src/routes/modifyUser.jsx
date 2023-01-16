@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import {FormControl, InputLabel, MenuItem, Select, Stack} from "@mui/material";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
+import {address} from "../index";
 
 
 export default function ModifyUser() {
@@ -16,7 +17,7 @@ export default function ModifyUser() {
     const loggedUser = localStorage.getItem('username')
     const role = localStorage.getItem('role');
     useEffect(() => {
-        axios.post('http://localhost:3001/validate', {username: loggedUser}, {headers: {'authorization': token}})
+        axios.post(address + '/validate', {username: loggedUser}, {headers: {'authorization': token}})
             .then((response) => {
                 if (!response.data) {
                     return navigate('/')
@@ -49,7 +50,7 @@ export default function ModifyUser() {
     const fetchUser = useCallback(() => {
         console.log(location.state.user)
         axios
-            .get('http://localhost:3001/users/' + location.state.user, {headers: {'authorization': token}})
+            .get(address + '/users/' + location.state.user, {headers: {'authorization': token}})
             .then((res) => {
                 console.log(res);
                 reset(res.data);
@@ -71,7 +72,7 @@ export default function ModifyUser() {
             console.log('stop you cannot access');
         }
 
-        axios.put('http://localhost:3001/users/' + location.state.user, {
+        axios.put(address + '/users/' + location.state.user, {
             username: data.username,
             firstname: data.firstname,
             lastname: data.lastname,
