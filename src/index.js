@@ -6,7 +6,6 @@ import User from "./routes/user.jsx";
 import ShowUsers from "./routes/showUsers.jsx";
 import Signup from "./routes/signup.jsx";
 import ModifyUser from "./routes/modifyUser.jsx";
-import DeleteUser from "./routes/deleteUser.jsx";
 import CheckUser from "./routes/checkUser.jsx";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
