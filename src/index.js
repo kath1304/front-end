@@ -15,7 +15,7 @@ import {
 } from "react-router-dom";
 import Root from "./routes/root";
 
-export const address = 'http://10.11.13.97:80/api/'
+export const address = 'http://10.11.13.97/api/'
 
 
 const router = createBrowserRouter([
