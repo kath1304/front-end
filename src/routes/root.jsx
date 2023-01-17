@@ -22,7 +22,7 @@ function HomeIcon(props) {
 }
 
 function handleClickLogout() {
-    axios.get(address + '/logout/', {headers: {'authorization': localStorage.getItem('authentication')}})
+    axios.get('http://10.11.13.97/logout', {headers: {'authorization': localStorage.getItem('authentication')}})
         .then(() => {
             localStorage.removeItem('authentication')
             localStorage.removeItem('role')

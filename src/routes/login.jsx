@@ -37,7 +37,7 @@ export default function Login() {
         }
     });
 
-    axios.post(address + '/validate', {username: loggedUser}, {headers: {'authorization': oldToken}})
+    axios.post('http://10.11.13.97/validate', {username: loggedUser}, {headers: {'authorization': oldToken}})
         .then((response) => {
             if (response.data) {
                 if (localStorage.getItem('role') === 'admin') {
