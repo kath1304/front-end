@@ -4,11 +4,10 @@ import React from "react";
 import axios from 'axios';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import Button from '@mui/material/Button';
+import "../App.css"
 
-
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {FormControl, InputLabel, MenuItem, Select, Stack} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {address} from "../index";
 
@@ -68,80 +67,104 @@ export default function Signup() {
         .catch(e => {
             console.error(e)
         })
+
     return (
-
         <div className="App">
-            <form onSubmit={handleSubmit(onSubmit)}>
-
+            <form onSubmit={handleSubmit(onSubmit)}
+                  style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      width: '100%',
+                      height: '100%',
+                      marginTop: '5%'
+                  }}>
                 <LockPersonIcon fontSize="large" color={"secondary"}/>
-                 <Typography variant="h5"> Registration  </Typography>
+                <Typography variant="h5">Register user</Typography>
 
-                <Box
-                    sx={{
-                        '& .MuiTextField-root': {m: 0.5, width: '25ch'},
-                    }}
-                    noValidate
-                    autoComplete="off"
-                >
-                    <div>
+                <div style={{
+                    display: 'flex',
+                    width: '50%',
+                    justifyContent: 'space-between',
+                    marginTop: '2%',
+                    marginBottom: '2%'
+                }}>
+                    <div style={{width: '45%'}}>
                         <TextField
                             id="outlined-username-input"
                             label="Username"
                             name="username"
                             autoComplete="current-username"
+                            sx={{width: '100%'}}
                             {...register("username", {required: true})}
                         />
                     </div>
-
-                    <div>
+                    <div style={{width: '45%'}}>
                         <TextField
                             id="outlined-firstname-input"
                             label="First Name"
                             name="firstname"
                             autoComplete="current-firstname"
+                            sx={{width: '100%'}}
                             {...register("firstname", {required: true})}
                         />
                     </div>
+                </div>
 
-                    <div>
+                <div style={{
+                    display: 'flex',
+                    width: '50%',
+                    justifyContent: 'space-between',
+                    marginBottom: '2%'
+                }}>
+                    <div style={{width: '45%'}}>
                         <TextField
                             id="outlined-lastname-input"
                             label="Last Name"
                             name="lastname"
                             autoComplete="current-lastname"
+                            sx={{width: '100%'}}
                             {...register("lastname", {required: true})}
                         />
                     </div>
-
-                    <div>
+                    <div style={{width: '45%'}}>
                         <TextField
                             id="outlined-email-input"
                             label="E - mail"
                             name="email"
                             autoComplete="current-email"
+                            sx={{width: '100%'}}
                             {...register("email", {required: true})}
                         />
                     </div>
+                </div>
 
-                    <div>
+                <div style={{
+                    display: 'flex',
+                    width: '50%',
+                    justifyContent: 'space-between',
+                    marginBottom: '2%'
+                }}>
+                    <div style={{width: '45%'}}>
                         <TextField
                             id="outlined-password-input"
                             label="Password"
                             type="password"
                             name="password"
                             autoComplete="current-password"
+                            sx={{width: '100%'}}
                             {...register("password", {required: true})}
                         />
                     </div>
-
-                    <div>
-                        <FormControl sx={{ minWidth: 120 }}>
-                            <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                    <div style={{width: '45%'}}>
+                        <FormControl sx={{width: '100%'}}>
+                            <InputLabel id="create-user-form-role">Role</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
-                                id="demo-simple-select"
+                                id="create-user-form-role-select"
                                 value={newRole}
                                 label="Role"
+                                sx={{width: '100%'}}
                                 {...register("role_name", {required: true})}
                                 onChange={handleChange}
                             >
@@ -150,17 +173,33 @@ export default function Signup() {
                             </Select>
                         </FormControl>
                     </div>
+                </div>
 
-
-                </Box>
-                <Stack spacing={2} direction="row-reverse">
+                <div style={{
+                    display: 'flex',
+                    width: '20%',
+                    justifyContent: 'space-between'
+                }}>
                     <Button
                         variant="contained"
                         type="submit"
-                        color={"secondary"}> Sign Up</Button>
-                </Stack>
+                        color={"secondary"}
+                        sx={{width: '45%'}}>
+                        Register
+                    </Button>
 
+                    <Button onClick={() => {
+                        navigate('/paths/admin');
+                    }}
+                            variant="contained"
+                            type="submit"
+                            color={"secondary"}
+                            sx={{width: '45%'}}>
+                        Cancel
+                    </Button>
+                </div>
             </form>
         </div>
     )
+
 }

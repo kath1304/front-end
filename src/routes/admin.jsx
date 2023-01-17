@@ -41,19 +41,26 @@ export default function Admin() {
     }
 
     return(
-        <div id="admin-home">
+        <div style={{
+            height: '200px',
+            marginTop: '10%',
+            display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'stretch'
+        }}>
             <div className="admin-home-square">
                 <Button className="admin-home-selection" onClick={handleClickShowUsers}>
-                    <GroupIcon></GroupIcon>
+                    <GroupIcon/>
                     <div>Show users</div>
                 </Button>
             </div>
             <div className="admin-home-square">
                 <Button className="admin-home-selection" onClick={handleClickSignUp}>
-                    <GroupAddIcon></GroupAddIcon>
-                    <div>Sign Up User</div>
+                    <GroupAddIcon/>
+                    <div>Create User</div>
                 </Button>
             </div>
         </div>
     )
+
 }

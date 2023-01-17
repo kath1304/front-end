@@ -8,13 +8,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Modal} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete"
-import SendIcon from "@mui/icons-material/Send"
 import EditIcon from '@mui/icons-material/Edit';
 import {address} from "../index";
 
@@ -122,12 +121,12 @@ export default function ShowUsers() {
             <Table sx={{minWidth: 700}} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell align="center">USERNAME</StyledTableCell>
-                        <StyledTableCell align="center">FIRST NAME</StyledTableCell>
-                        <StyledTableCell align="center">LAST NAME</StyledTableCell>
-                        <StyledTableCell align="center">E - MAIL</StyledTableCell>
-                        <StyledTableCell align="center">ROLE</StyledTableCell>
-                        <StyledTableCell align="center" colSpan="2">EDIT</StyledTableCell>
+                        <StyledTableCell align="left">USERNAME</StyledTableCell>
+                        <StyledTableCell align="left">FIRST NAME</StyledTableCell>
+                        <StyledTableCell align="left">LAST NAME</StyledTableCell>
+                        <StyledTableCell align="left">E - MAIL</StyledTableCell>
+                        <StyledTableCell align="left">ROLE</StyledTableCell>
+                        <StyledTableCell align="left" colSpan="2"></StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -152,7 +151,7 @@ export default function ShowUsers() {
                                 <Button onClick={() => {
                                     handleClickModify(user?.username)
                                 }} variant="outlined" startIcon={<EditIcon/>} color={"primary"}>
-                                    Modify
+                                    Edit
                                 </Button>
                             </StyledTableCell>
 
@@ -169,7 +168,7 @@ export default function ShowUsers() {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Want to delete {currentUsername} user?
+                        Confirm deletion of user: {currentUsername}?
                     </Typography>
                     <Typography id="modal-modal-description" sx={{mt: 2}}>
                         <Button onClick={handleConferma}>Confirm</Button>
@@ -179,57 +178,5 @@ export default function ShowUsers() {
             </Modal>
         </TableContainer>
     )
-
-
-    /*return (
-        <div className="App">
-            <h2>
-                Tabella degli utenti
-            </h2>
-            <table className="tabella">
-                <thead>
-                <tr>
-                    <th>username</th>
-                    <th>firstname</th>
-                    <th>lastname</th>
-                    <th>email</th>
-                    <th>role</th>
-                    <th colSpan="2">Edit</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    users?.map((data, index) => {
-                        return (
-                            <tr key={index}>
-                                <td>{data?.username}</td>
-                                <td>{data?.firstname}</td>
-                                <td>{data?.lastname}</td>
-                                <td>{data?.email}</td>
-                                <td>{data?.role_name}</td>
-
-                                <td><button onClick= {() => {handleClickModify(data?.username)}}>modify</button></td>
-                                <td><button onClick= {() => {handleClickDelete(data?.username)}}>delete</button></td>
-
-                                <td>
-                                    <button onClick={() => {
-                                        toComponentB(data?.username)
-                                    }}>delete
-                                    </button>
-                                </td>
-                                <td><Link to={"/modifyUser"}>
-                                    <button>modify</button>
-                                </Link></td>
-
-                            </tr>
-                        )
-                    })
-                }
-                </tbody>
-            </table>
-        </div>
-    );
-
-*/
 
 }

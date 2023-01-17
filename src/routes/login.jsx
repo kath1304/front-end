@@ -5,10 +5,10 @@ import {useNavigate} from "react-router-dom";
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import TextField from "@mui/material/TextField";
-import {Stack} from "@mui/material";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import {address} from "../index";
+import Typography from "@mui/material/Typography";
 
 export let intervalId
 
@@ -73,21 +73,16 @@ export default function Login() {
 
     return (
         <div className="App">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} style={{marginTop: '10%'}}>
 
                 <div style={{textAlign: "center"}}>
-                    <AccountCircleIcon fontSize={"large"} color={"secondary"}
-                    />
-
+                    <AccountCircleIcon fontSize={"large"} color={"secondary"}/>
                 </div>
+                <Typography variant="h5" style={{textAlign: 'center', marginBottom: '2%'}}>LOGIN</Typography>
 
-                <div style={{textAlign: "center"}}>
-                    REGISTER
-                </div>
                 <Box
                     sx={{
                         '& .MuiTextField-root': {m: 0.8, width: '25ch'},
-                        marginTop: 8,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -106,7 +101,7 @@ export default function Login() {
                         />
                     </div>
 
-                    <div>
+                    <div style={{marginBottom: '2%'}}>
                         <TextField
                             id="outlined-password-input"
                             label="Password"
@@ -118,15 +113,15 @@ export default function Login() {
                         />
                     </div>
 
-
-                    <Stack spacing={2} direction="row-reverse">
-                        <Button
-                            variant="contained"
-                            type="submit"
-                            color={"secondary"}> Login </Button>
-                    </Stack>
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        color={"secondary"}>
+                        Login
+                    </Button>
                 </Box>
             </form>
         </div>
     )
+
 }
