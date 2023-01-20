@@ -68,6 +68,7 @@ export default function Login() {
             })
             .catch((e) => {
                 console.error(e)
+                if(e.request.status === 403) alert('Username or password not valid')
             })
     };
 

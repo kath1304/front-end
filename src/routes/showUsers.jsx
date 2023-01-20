@@ -78,6 +78,7 @@ export default function ShowUsers() {
             .catch(e => {
                 console.error(e)
             })
+        // eslint-disable-next-line
     }, []);
 
     const fetchUsers = () => {
@@ -92,8 +93,8 @@ export default function ShowUsers() {
             });
     }
 
-    const handleClickModify = (username) => {
-        navigate('/paths/modifyUser', {state: {user: username}})
+    const handleClickEdit = (username) => {
+        navigate('/paths/editUser', {state: {user: username}})
     }
 
     const StyledTableCell = styled(TableCell)(({theme}) => ({
@@ -149,7 +150,7 @@ export default function ShowUsers() {
 
                             <StyledTableCell align="right">
                                 <Button onClick={() => {
-                                    handleClickModify(user?.username)
+                                    handleClickEdit(user?.username)
                                 }} variant="outlined" startIcon={<EditIcon/>} color={"primary"}>
                                     Edit
                                 </Button>

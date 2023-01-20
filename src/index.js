@@ -4,8 +4,6 @@ import Login from "./routes/login.jsx";
 import Admin from "./routes/admin.jsx";
 import User from "./routes/user.jsx";
 import ShowUsers from "./routes/showUsers.jsx";
-import Signup from "./routes/signup.jsx";
-import ModifyUser from "./routes/modifyUser.jsx";
 import CheckUser from "./routes/checkUser.jsx";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -15,6 +13,8 @@ import {
 } from "react-router-dom";
 import Root from "./routes/root";
 import ErrorPage from "./errorPage";
+import RegisterUser from "./routes/registerUser";
+import EditUser from "./routes/editUser";
 
 export const address = 'http://10.11.13.97/api/'
 
@@ -42,12 +42,12 @@ const router = createBrowserRouter([
                 element: <ShowUsers />
             },
             {
-                path: "/paths/sign",
-                element: <Signup />
+                path: "/paths/registerUser",
+                element: <RegisterUser />
             },
             {
-                path: "/paths/modifyUser",
-                element: <ModifyUser />
+                path: "/paths/editUser",
+                element: <EditUser />
             },
             {
                 path: "/paths/checkUser",

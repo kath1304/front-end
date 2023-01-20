@@ -50,8 +50,9 @@ export default function User() {
             .catch(e => {
                 console.error(e)
             })
-
+        // eslint-disable-next-line
     }, [])
+
     return (
         <div className="App">
             <TableContainer component={Paper}>
@@ -68,7 +69,7 @@ export default function User() {
                                 key={row.user_username}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
-                                <TableCell component="th" scope="row" >
+                                <TableCell component="th" scope="row">
                                     <h3>{row.user_username}</h3>
                                 </TableCell>
                                 <TableCell align="right">

@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import {address} from "../index";
 
 
-export default function Signup() {
+export default function RegisterUser() {
     const token = localStorage.getItem('authentication')
     const loggedUser = localStorage.getItem('username')
     const role = localStorage.getItem('role');
@@ -51,7 +51,7 @@ export default function Signup() {
             })
             .catch((error) => {
                 console.error(error)
-            })
+                if(error.request.status === 409) alert('A user with this username already exists')           })
     }
 
 

@@ -36,8 +36,8 @@ export default function Admin() {
         navigate('/paths/showUsers')
     }
 
-    const handleClickSignUp = () => {
-        navigate('/paths/sign')
+    const handleClickRegisterUser = () => {
+        navigate('/paths/registerUser')
     }
 
     return(
@@ -55,9 +55,9 @@ export default function Admin() {
                 </Button>
             </div>
             <div className="admin-home-square">
-                <Button className="admin-home-selection" onClick={handleClickSignUp}>
+                <Button className="admin-home-selection" onClick={handleClickRegisterUser}>
                     <GroupAddIcon/>
-                    <div>Create User</div>
+                    <div>Register User</div>
                 </Button>
             </div>
         </div>

@@ -10,7 +10,7 @@ import {address} from "../index";
 import Typography from "@mui/material/Typography";
 
 
-export default function ModifyUser() {
+export default function EditUser() {
     const location = useLocation();
     const navigate = useNavigate()
     const token = localStorage.getItem('authentication')
@@ -85,6 +85,7 @@ export default function ModifyUser() {
             })
             .catch((error) => {
                 console.error(error)
+                if(error.request.status === 409) alert('A user with this username already exists')
             })
     }, [navigate])
 
