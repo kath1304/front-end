@@ -14,6 +14,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import Root from "./routes/root";
+import ErrorPage from "./errorPage";
 
 export const address = 'http://10.11.13.97/api/'
 
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Login />,
+        errorElement: <ErrorPage />
     },
     {
         path: "/paths",
