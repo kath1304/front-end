@@ -1,20 +1,17 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import ImageIcon from '@mui/icons-material/Image';
-import WorkIcon from '@mui/icons-material/Work';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import Divider from '@mui/material/Divider';
 import PersonIcon from '@mui/icons-material/Person';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import EngineeringIcon from '@mui/icons-material/Engineering';
-import {useNavigate} from 'react-router-dom';
 import {address} from "../index";
+
 export default function CheckUser() {
     const navigate = useNavigate();
     const token = localStorage.getItem('authentication')
@@ -37,6 +34,7 @@ export default function CheckUser() {
             .catch(e => {
                 console.error(e)
             });
+        // eslint-disable-next-line
     }, []);
 
     const fetchUser = () => {
@@ -92,7 +90,7 @@ export default function CheckUser() {
                             <LocalPostOfficeIcon/>
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="email"secondary={user?.email} />
+                    <ListItemText primary="email" secondary={user?.email} />
                 </ListItem>
 
                 <Divider variant="inset" component="li"/>

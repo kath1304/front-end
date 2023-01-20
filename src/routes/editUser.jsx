@@ -1,9 +1,9 @@
 import {useForm} from "react-hook-form";
-import {useNavigate, useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import React, {useCallback, useEffect} from "react";
 import axios from 'axios';
 import TextField from "@mui/material/TextField";
-import {FormControl, InputLabel, MenuItem, Select, Stack} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import {address} from "../index";
@@ -30,12 +30,12 @@ export default function EditUser() {
             .catch(e => {
                 console.error(e)
             });
+        // eslint-disable-next-line
     }, []);
     const {
         register,
         handleSubmit,
-        reset,
-        formState: {errors}
+        reset
     } = useForm({
         defaultValues: {
             username: '',
@@ -58,6 +58,7 @@ export default function EditUser() {
             .catch((err) => {
                 console.log(err);
             });
+        // eslint-disable-next-line
     }, [reset])
 
     const [newRole, setNewRole] = React.useState('');
@@ -80,13 +81,14 @@ export default function EditUser() {
             password: data.password,
             role_name: data.role_name,
         }, {headers: {'authorization': token, 'role': role}})
-            .then((response) => {
+            .then(() => {
                 return navigate('/paths/showUsers')
             })
             .catch((error) => {
                 console.error(error)
                 if(error.request.status === 409) alert('A user with this username already exists')
             })
+        // eslint-disable-next-line
     }, [navigate])
 
 

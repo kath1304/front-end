@@ -2,14 +2,12 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import SvgIcon from '@mui/material/SvgIcon';
 import axios from "axios";
 import {Outlet, useNavigate} from "react-router-dom";
 import {intervalId} from "./login";
-import {address} from "../index";
 
 let navigate
 

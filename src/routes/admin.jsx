@@ -7,7 +7,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import Button from "@mui/material/Button";
 import {address} from "../index";
 
-function Item(props) {
+function Item() {
     return null;
 }
 

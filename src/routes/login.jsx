@@ -2,7 +2,6 @@ import React from "react";
 import axios from 'axios';
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
-
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -28,8 +27,7 @@ export default function Login() {
     const navigate = useNavigate()
     const {
         register,
-        handleSubmit,
-        formState: {errors}
+        handleSubmit
     } = useForm({
         defaultValues: {
             username: '',

@@ -5,7 +5,6 @@ import axios from 'axios';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import Button from '@mui/material/Button';
 import "../App.css"
-
 import TextField from '@mui/material/TextField';
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -19,8 +18,7 @@ export default function RegisterUser() {
     const navigate = useNavigate()
     const {
         register,
-        handleSubmit,
-        formState: {errors}
+        handleSubmit
     } = useForm({
         defaultValues: {
             username: '',

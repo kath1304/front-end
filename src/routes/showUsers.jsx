@@ -107,7 +107,7 @@ export default function ShowUsers() {
         },
     }));
 
-    const StyledTableRow = styled(TableRow)(({theme}) => ({
+    const StyledTableRow = styled(TableRow)(() => ({
         '&:nth-of-type(odd)': {
             backgroundColor: "theme.palette.action.hover",
         },
