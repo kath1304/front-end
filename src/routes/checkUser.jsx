@@ -10,7 +10,7 @@ import Divider from '@mui/material/Divider';
 import PersonIcon from '@mui/icons-material/Person';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import EngineeringIcon from '@mui/icons-material/Engineering';
-import {address} from "../index";
+import {address, addressApi} from "../index";
 
 export default function CheckUser() {
     const navigate = useNavigate();
@@ -39,7 +39,7 @@ export default function CheckUser() {
 
     const fetchUser = () => {
         axios
-            .get(address + `/users/${location.state.user}`, {headers: {'authorization': token}})
+            .get(addressApi + `/users/${location.state.user}`, {headers: {'authorization': token}})
             .then((res) => {
                 console.log(res);
                 setUser(res.data);

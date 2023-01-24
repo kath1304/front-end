@@ -16,7 +16,8 @@ import ErrorPage from "./errorPage";
 import RegisterUser from "./routes/registerUser";
 import EditUser from "./routes/editUser";
 
-export const address = 'http://10.11.13.97/api'
+export const addressApi = 'http://10.11.13.97/api'
+export const address = 'http://10.11.13.97'
 
 
 const router = createBrowserRouter([

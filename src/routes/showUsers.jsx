@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete"
 import EditIcon from '@mui/icons-material/Edit';
-import {address} from "../index";
+import {address, addressApi} from "../index";
 
 const style = {
     position: 'absolute',
@@ -53,7 +53,7 @@ export default function ShowUsers() {
 
     const handleConferma = () => {
         axios
-            .delete(address + '/users/' + currentUsername, {headers: {'authorization': localStorage.getItem('authentication')}})
+            .delete(addressApi + '/users/' + currentUsername, {headers: {'authorization': localStorage.getItem('authentication')}})
             .then(() => {
                 setUsers(users.filter(user => user.username !== currentUsername))
                 setCurrentUsername(null)
@@ -83,7 +83,7 @@ export default function ShowUsers() {
 
     const fetchUsers = () => {
         axios
-            .get(address + '/users/', {headers: {'authorization': token}})
+            .get(addressApi + '/users/', {headers: {'authorization': token}})
             .then((res) => {
                 console.log(res);
                 setUsers(res.data);

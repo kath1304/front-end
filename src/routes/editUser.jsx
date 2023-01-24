@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
-import {address} from "../index";
+import {address, addressApi} from "../index";
 import Typography from "@mui/material/Typography";
 
 
@@ -50,7 +50,7 @@ export default function EditUser() {
     const fetchUser = useCallback(() => {
         console.log(location.state.user)
         axios
-            .get(address + '/users/' + location.state.user, {headers: {'authorization': token}})
+            .get(addressApi + '/users/' + location.state.user, {headers: {'authorization': token}})
             .then((res) => {
                 console.log(res);
                 reset(res.data);
@@ -73,7 +73,7 @@ export default function EditUser() {
             console.log('stop you cannot access');
         }
 
-        axios.put(address + '/users/' + location.state.user, {
+        axios.put(addressApi + '/users/' + location.state.user, {
             username: data.username,
             firstname: data.firstname,
             lastname: data.lastname,

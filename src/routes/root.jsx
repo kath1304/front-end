@@ -8,6 +8,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import axios from "axios";
 import {Outlet, useNavigate} from "react-router-dom";
 import {intervalId} from "./login";
+import {address} from "../index";
 
 let navigate
 
@@ -20,7 +21,7 @@ function HomeIcon(props) {
 }
 
 function handleClickLogout() {
-    axios.get('http://10.11.13.97/logout', {headers: {'authorization': localStorage.getItem('authentication')}})
+    axios.get(address + '/logout', {headers: {'authorization': localStorage.getItem('authentication')}})
         .then(() => {
             localStorage.removeItem('authentication')
             localStorage.removeItem('role')
@@ -43,7 +44,6 @@ function handleClickHome() {
 
 export default function Root() {
     navigate = useNavigate()
-    //add render name, surname
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">

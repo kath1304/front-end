@@ -8,7 +8,7 @@ import "../App.css"
 import TextField from '@mui/material/TextField';
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import {address} from "../index";
+import {address, addressApi} from "../index";
 
 
 export default function RegisterUser() {
@@ -36,7 +36,7 @@ export default function RegisterUser() {
 
 
     const onSubmit = (data) => {
-        axios.post(address + '/users/', {
+        axios.post(addressApi + '/users/', {
             username: data.username,
             firstname: data.firstname,
             lastname: data.lastname,

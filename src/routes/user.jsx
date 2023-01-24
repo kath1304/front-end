@@ -11,7 +11,7 @@ import {useEffect} from 'react';
 import {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {styled} from "@mui/material/styles";
-import {address} from "../index";
+import {address, addressApi} from "../index";
 
 export default function User() {
     const navigate = useNavigate()
@@ -39,7 +39,7 @@ export default function User() {
                 if (role !== "user") {
                     return navigate('/paths/admin')
                 }
-                axios.get(address + '/loggedSessions/', {headers: {'authorization': token}})
+                axios.get(addressApi + '/loggedSessions/', {headers: {'authorization': token}})
                     .then((response) => {
                         setRows(response.data)
                     })

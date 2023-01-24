@@ -35,7 +35,7 @@ export default function Login() {
         }
     });
 
-    axios.post('http://10.11.13.97/validate', {username: loggedUser}, {headers: {'authorization': oldToken}})
+    axios.post(address + '/validate', {username: loggedUser}, {headers: {'authorization': oldToken}})
         .then((response) => {
             if (response.data) {
                 if (localStorage.getItem('role') === 'admin') {
@@ -52,7 +52,7 @@ export default function Login() {
 
     const onSubmit = (data) => {
         console.log(data.username)
-        axios.post('http://10.11.13.97/login', {username: data.username, password: data.password})
+        axios.post(address + '/login', {username: data.username, password: data.password})
             .then((response) => {
                 localStorage.setItem("authentication", "Bearer " + response.data.token)
                 localStorage.setItem("role", response.data.role)
