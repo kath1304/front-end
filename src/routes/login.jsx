@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from 'axios';
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import {address} from "../index";
 import Typography from "@mui/material/Typography";
+import {Alert} from "@mui/material";
 
 export let intervalId
 
@@ -25,6 +26,7 @@ export default function Login() {
     const oldToken = localStorage.getItem('authentication')
     const loggedUser = localStorage.getItem('username')
     const navigate = useNavigate()
+    const [error, setError] = useState(false)
     const {
         register,
         handleSubmit
@@ -51,6 +53,7 @@ export default function Login() {
 
 
     const onSubmit = (data) => {
+        setError(false)
         console.log(data.username)
         axios.post(address + '/login', {username: data.username, password: data.password})
             .then((response) => {
@@ -66,7 +69,7 @@ export default function Login() {
             })
             .catch((e) => {
                 console.error(e)
-                if(e.request.status === 403) alert('Username or password not valid')
+                if(e.request.status === 403) setError(true)
             })
     };
 
@@ -118,6 +121,7 @@ export default function Login() {
                         color={"secondary"}>
                         Login
                     </Button>
+                    {error && <Alert severity="error" sx={{marginTop: '2%'}}>Username or password not valid</Alert>}
                 </Box>
             </form>
         </div>

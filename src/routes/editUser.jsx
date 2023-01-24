@@ -1,9 +1,9 @@
 import {useForm} from "react-hook-form";
 import {useLocation, useNavigate} from "react-router-dom";
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from 'axios';
 import TextField from "@mui/material/TextField";
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {Alert, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import {address, addressApi} from "../index";
@@ -16,6 +16,22 @@ export default function EditUser() {
     const token = localStorage.getItem('authentication')
     const loggedUser = localStorage.getItem('username')
     const role = localStorage.getItem('role');
+    const [error, setError] = useState(false)
+    const {
+        register,
+        handleSubmit,
+        reset
+    } = useForm({
+        defaultValues: {
+            username: '',
+            firstname: '',
+            lastname: '',
+            email: '',
+            password: '',
+            role_name: ''
+        }
+    });
+
     useEffect(() => {
         axios.post(address + '/validate', {username: loggedUser}, {headers: {'authorization': token}})
             .then((response) => {
@@ -32,20 +48,6 @@ export default function EditUser() {
             });
         // eslint-disable-next-line
     }, []);
-    const {
-        register,
-        handleSubmit,
-        reset
-    } = useForm({
-        defaultValues: {
-            username: '',
-            firstname: '',
-            lastname: '',
-            email: '',
-            password: '',
-            role_name: ''
-        }
-    });
 
     const fetchUser = useCallback(() => {
         console.log(location.state.user)
@@ -67,6 +69,7 @@ export default function EditUser() {
     };
 
     const onSubmit = useCallback((data) => {
+        setError(false)
         console.log(data.firstname)
         console.log(role)
         if (role === 'user') {
@@ -86,7 +89,7 @@ export default function EditUser() {
             })
             .catch((error) => {
                 console.error(error)
-                if(error.request.status === 409) alert('A user with this username already exists')
+                if(error.request.status === 409) setError(true)
             })
         // eslint-disable-next-line
     }, [navigate])
@@ -103,6 +106,7 @@ export default function EditUser() {
                       height: '100%',
                       marginTop: '5%'
                   }}>
+                {error && <Alert severity="error" sx={{marginBottom: '2%'}}>A user with this username already exists</Alert>}
                 <EditIcon fontSize="large" color={"secondary"}/>
                 <Typography variant="h5">Edit user</Typography>
 

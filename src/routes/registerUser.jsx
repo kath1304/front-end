@@ -1,12 +1,12 @@
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useState} from "react";
 import axios from 'axios';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import Button from '@mui/material/Button';
 import "../App.css"
 import TextField from '@mui/material/TextField';
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {Alert, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {address, addressApi} from "../index";
 
@@ -16,6 +16,8 @@ export default function RegisterUser() {
     const loggedUser = localStorage.getItem('username')
     const role = localStorage.getItem('role');
     const navigate = useNavigate()
+    const [newRole, setNewRole] = useState('');
+    const [error, setError] = useState(false)
     const {
         register,
         handleSubmit
@@ -29,13 +31,14 @@ export default function RegisterUser() {
             role_name: '',
         }
     });
-    const [newRole, setNewRole] = React.useState('');
+
     const handleChange = (event) => {
         setNewRole(event.target.value);
     };
 
 
     const onSubmit = (data) => {
+        setError(false)
         axios.post(addressApi + '/users/', {
             username: data.username,
             firstname: data.firstname,
@@ -49,7 +52,8 @@ export default function RegisterUser() {
             })
             .catch((error) => {
                 console.error(error)
-                if(error.request.status === 409) alert('A user with this username already exists')           })
+                if(error.request.status === 409) setError(true)
+            })
     }
 
 
@@ -77,6 +81,7 @@ export default function RegisterUser() {
                       height: '100%',
                       marginTop: '5%'
                   }}>
+                {error && <Alert severity="error" sx={{marginBottom: '2%'}}>A user with this username already exists</Alert>}
                 <LockPersonIcon fontSize="large" color={"secondary"}/>
                 <Typography variant="h5">Register user</Typography>
 
