@@ -19,6 +19,7 @@ const autoRenew = () => {
         .then((response) => {
             localStorage.setItem("authentication", "Bearer " + response.data.token)
             localStorage.setItem("role", response.data.role)
+            localStorage.setItem("username", response.data.username)
         })
         .catch(e => {
             console.error(e)
@@ -65,7 +66,7 @@ export default function Login() {
                 localStorage.setItem("authentication", "Bearer " + response.data.token)
                 localStorage.setItem("role", response.data.role)
                 localStorage.setItem("username", response.data.username)
-                intervalId = setInterval(autoRenew, 3480000)
+                intervalId = setInterval(autoRenew, 3480000)  //PRIMO CAMPO COSA VA LANCIATO, SECONDO CAMPO DOPO QUANTO TEMPO
                 if (response.data.role === 'admin') {
                     return navigate('/paths/admin')
                 } else {

@@ -41,6 +41,7 @@ export default function ShowUsers() {
 
     const [currentUsername, setCurrentUsername] = useState(null)
 
+    //FUNZIONI USATE A SUPPORTO DEL POP-UP
     const handleOpen = username => {
         setCurrentUsername(username)
         setOpen(true)

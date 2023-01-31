@@ -16,8 +16,8 @@ import ErrorPage from "./errorPage";
 import RegisterUser from "./routes/registerUser";
 import EditUser from "./routes/editUser";
 
-export const addressApi = 'http://10.11.13.97/api'
-export const address = 'http://10.11.13.97'
+export const addressApi = 'http://10.11.13.97/api'  //USATA PER LE CHIAMATE AL BACK-END
+export const address = 'http://10.11.13.97'  //USATA PER LE CHIAMATE NORMALI, AD ESEMPIO IL LOG-IN
 
 
 const router = createBrowserRouter([

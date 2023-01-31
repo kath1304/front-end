@@ -26,7 +26,7 @@ function handleClickLogout() {
             localStorage.removeItem('authentication')
             localStorage.removeItem('role')
             localStorage.removeItem('username')
-            clearInterval(intervalId)
+            clearInterval(intervalId)  //AZZERA ED ELIMINA L'INTERVALLO DEFINITO PER IL RENEW DEL TOKEN
             return navigate('/')
         })
         .catch(e => {
