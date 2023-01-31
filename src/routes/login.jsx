@@ -15,7 +15,6 @@ export let intervalId
 
 
 const autoRenew = () => {
-    const navigate = useNavigate()
     axios.get(address + '/renewToken', {headers: {'authorization': localStorage.getItem('authentication')}})
         .then((response) => {
             localStorage.setItem("authentication", "Bearer " + response.data.token)
@@ -26,7 +25,6 @@ const autoRenew = () => {
             localStorage.removeItem('authentication')
             localStorage.removeItem('role')
             localStorage.removeItem('username')
-            return navigate('/');
         })
 }
 export default function Login() {
