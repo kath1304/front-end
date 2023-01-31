@@ -90,6 +90,9 @@ export default function ShowUsers() {
             })
             .catch((err) => {
                 console.log(err);
+                localStorage.removeItem('authentication')
+                localStorage.removeItem('role')
+                localStorage.removeItem('username')
                 return navigate('/');
             });
     }
