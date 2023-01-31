@@ -90,7 +90,7 @@ export default function ShowUsers() {
             })
             .catch((err) => {
                 console.log(err);
-                return navigate('/login');
+                return navigate('/');
             });
     }
 
