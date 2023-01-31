@@ -61,6 +61,10 @@ export default function ShowUsers() {
             })
             .catch((error) => {
                 console.error(error)
+                localStorage.removeItem('authentication')
+                localStorage.removeItem('role')
+                localStorage.removeItem('username')
+                return navigate('/');
             })
     }
 
@@ -77,6 +81,10 @@ export default function ShowUsers() {
             })
             .catch(e => {
                 console.error(e)
+                localStorage.removeItem('authentication')
+                localStorage.removeItem('role')
+                localStorage.removeItem('username')
+                return navigate('/');
             })
         // eslint-disable-next-line
     }, []);

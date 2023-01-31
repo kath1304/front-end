@@ -20,6 +20,10 @@ const autoRenew = () => {
         })
         .catch(e => {
             console.error(e)
+            localStorage.removeItem('authentication')
+            localStorage.removeItem('role')
+            localStorage.removeItem('username')
+            return navigate('/');
         })
 }
 export default function Login() {

@@ -45,10 +45,18 @@ export default function User() {
                     })
                     .catch(e => {
                         console.error(e)
+                        localStorage.removeItem('authentication')
+                        localStorage.removeItem('role')
+                        localStorage.removeItem('username')
+                        return navigate('/');
                     })
             })
             .catch(e => {
                 console.error(e)
+                localStorage.removeItem('authentication')
+                localStorage.removeItem('role')
+                localStorage.removeItem('username')
+                return navigate('/');
             })
         // eslint-disable-next-line
     }, [])

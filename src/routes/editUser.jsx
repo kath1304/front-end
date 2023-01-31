@@ -45,6 +45,10 @@ export default function EditUser() {
             })
             .catch(e => {
                 console.error(e)
+                localStorage.removeItem('authentication')
+                localStorage.removeItem('role')
+                localStorage.removeItem('username')
+                return navigate('/');
             });
         // eslint-disable-next-line
     }, []);
@@ -59,6 +63,10 @@ export default function EditUser() {
             })
             .catch((err) => {
                 console.log(err);
+                localStorage.removeItem('authentication')
+                localStorage.removeItem('role')
+                localStorage.removeItem('username')
+                return navigate('/');
             });
         // eslint-disable-next-line
     }, [reset])
@@ -90,6 +98,12 @@ export default function EditUser() {
             .catch((error) => {
                 console.error(error)
                 if(error.request.status === 409) setError(true)
+                else {
+                    localStorage.removeItem('authentication')
+                    localStorage.removeItem('role')
+                    localStorage.removeItem('username')
+                    return navigate('/');
+                }
             })
         // eslint-disable-next-line
     }, [navigate])

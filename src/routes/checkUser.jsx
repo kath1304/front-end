@@ -33,6 +33,10 @@ export default function CheckUser() {
             })
             .catch(e => {
                 console.error(e)
+                localStorage.removeItem('authentication')
+                localStorage.removeItem('role')
+                localStorage.removeItem('username')
+                return navigate('/');
             });
         // eslint-disable-next-line
     }, []);
@@ -46,6 +50,10 @@ export default function CheckUser() {
             })
             .catch((err) => {
                 console.log(err);
+                localStorage.removeItem('authentication')
+                localStorage.removeItem('role')
+                localStorage.removeItem('username')
+                return navigate('/');
             });
     }
 
