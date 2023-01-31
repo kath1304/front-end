@@ -12,9 +12,10 @@ import {Alert} from "@mui/material";
 
 export let intervalId
 
-const navigate = useNavigate()
+
 
 const autoRenew = () => {
+    const navigate = useNavigate()
     axios.get(address + '/renewToken', {headers: {'authorization': localStorage.getItem('authentication')}})
         .then((response) => {
             localStorage.setItem("authentication", "Bearer " + response.data.token)
@@ -29,6 +30,7 @@ const autoRenew = () => {
         })
 }
 export default function Login() {
+    const navigate = useNavigate()
     const oldToken = localStorage.getItem('authentication')
     const loggedUser = localStorage.getItem('username')
     const [error, setError] = useState(false)
