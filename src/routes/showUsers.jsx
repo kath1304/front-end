@@ -85,6 +85,7 @@ export default function ShowUsers() {
         axios
             .get(addressApi + '/users/', {headers: {'authorization': token}})
             .then((res) => {
+                console.log(res.status)
                 if(res.status === 403) {
                     return navigate('/login');
                 }
